@@ -1,0 +1,48 @@
+/* the common style */
+@import "./var.scss";
+body {
+  color: $color_title;
+  background-color: $bgcolor_body;
+  margin: 0 auto;
+  max-width: $width_page;
+}
+// icon 样式
+.iconfont {
+  font-size: 1rem;
+}
+// loading 动画
+.loading-enter-active,
+.loading-leave-active {
+  transition: opacity 1s;
+}
+
+.loading-enter,
+.loading-leave-active {
+  opacity: 0;
+}
+//fadeRight 动画
+.fadeRight-enter-active {
+  animation: fadeInRightBig 0.5s;
+}
+.fadeRight-leave-active {
+  animation: fadeOutRightBig 0.5s;
+}
+@keyframes fadeInRightBig {
+  from {
+    opacity: 0;
+    transform: translate3d(2000px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeOutRightBig {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(2000px, 0, 0);
+  }
+}
