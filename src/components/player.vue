@@ -1,43 +1,43 @@
 <template>
   <div>
     <!-- mini播放控件 -->
-    <mini-play 
-      :current-music="currentMusic" 
-      :song-pic="song.picUrl" 
-      :no-song-msg="noSongMsg" 
-      :icon-name="iconStateClass" 
-      :percent="percent" 
-      @showFullPlay="showFullPlay" 
-      @showPlayList="showPlayList" 
+    <mini-play
+      :current-music="currentMusic"
+      :song-pic="song.picUrl"
+      :no-song-msg="noSongMsg"
+      :icon-name="iconStateClass"
+      :percent="percent"
+      @showFullPlay="showFullPlay"
+      @showPlayList="showPlayList"
       @togglePlay="togglePlay"
     ></mini-play>
     <!-- 全屏播放控件 -->
-    <full-play 
-      :full-screen="fullScreen" 
-      :current-music="currentMusic" 
-      :current-time="currentTime" 
-      :duration="duration" 
-      :song-pic="song.picUrl" 
-      :icon-mode="iconMode" 
-      :icon-name="iconStateClass" 
-      :percent="percent" 
-      :percent-buffered="percentBuffered" 
-      :playing-lyric="playingLyric" 
+    <full-play
+      :full-screen="fullScreen"
+      :current-music="currentMusic"
+      :current-time="currentTime"
+      :duration="duration"
+      :song-pic="song.picUrl"
+      :icon-mode="iconMode"
+      :icon-name="iconStateClass"
+      :percent="percent"
+      :percent-buffered="percentBuffered"
+      :playing-lyric="playingLyric"
       :currentLyric="currentLyric"
       :currentLineNum="currentLineNum"
       :isPureMusic="isPureMusic"
-      @closeFull="setFullScreen(false)" 
-      @togglePlay="togglePlay" 
+      @closeFull="setFullScreen(false)"
+      @togglePlay="togglePlay"
       @changeMode="changeMode"
-      @forward="forward" 
-      @next="next" 
-      @percentChanging="percentChanging" 
+      @forward="forward"
+      @next="next"
+      @percentChanging="percentChanging"
       @percentChanged="percentChanged"
     ></full-play>
     <!-- 播放列表 -->
-    <play-list 
+    <play-list
       ref="playList"
-      :icon-mode="iconMode" 
+      :icon-mode="iconMode"
       @changeMode="changeMode"
     ></play-list>
   </div>
@@ -279,7 +279,6 @@ export default {
         this.playingLyric = "";
         this.currentLineNum = 0;
       }
-      console.log(this.isPureMusic);
     },
     handleLyric({ lineNum, txt }) {
       // 歌词变动时

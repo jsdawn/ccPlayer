@@ -44,7 +44,8 @@ export const getSongListDetail = (id) => {
 };
 //获取歌词
 export const getLyric = (id) => {
-  const url = `${wyUrl}/lyric`;
+  // const url = `${wyUrl}/lyric`;
+  const url = `http://api.mtnhao.com/lyric`;
   return req.get(url,{
     id: id
   });

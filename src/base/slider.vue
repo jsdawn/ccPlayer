@@ -76,7 +76,6 @@ export default {
     _initDots() {
       // 初始化点的数量
       this.dots = new Array(this.children.length); // 长度根据节点length
-      // console.log(this.children.length)
     },
     _initSlider() {
       // 初始化
@@ -96,7 +95,6 @@ export default {
       this.slider.on("scrollEnd", () => {
         // 派发scrollEnd事件,获取当前页currentPageIndex
         let pageIndex = this.slider.getCurrentPage().pageX; // 获取索引
-        // console.log(pageIndex)
         /*  if (this.loop) { // 如果是循环
              pageIndex += 0 // 因为循环模式下默认会节点拷贝了，所以实际index 应该 -1
           } */
