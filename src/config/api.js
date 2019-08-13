@@ -9,8 +9,23 @@
 import { wyUrl } from "./env";
 import req from "./http";
 
+export const apiConfig = {
+  getBannerList: {
+    url: `${wyUrl}/banner/list`,
+    mock: true
+  }
+};
+
+//获取banner数据
+export const getBannerList = type => {
+  const url = apiConfig.getBannerList.url;
+  return req.get(url, {
+    type: type
+  });
+};
+
 //排行榜榜单
-export const getToplist = idx => {
+export const getTopList = idx => {
   const url = `${wyUrl}/top/list`;
   return req.get(url, {
     idx: idx
@@ -36,17 +51,17 @@ export const getRecommend = () => {
   return req.get(url);
 };
 //获取歌单详情
-export const getSongListDetail = (id) => {
+export const getSongListDetail = id => {
   const url = `${wyUrl}/playlist/detail`;
-  return req.get(url,{
+  return req.get(url, {
     id: id
   });
 };
 //获取歌词
-export const getLyric = (id) => {
+export const getLyric = id => {
   // const url = `${wyUrl}/lyric`;
   const url = `http://api.mtnhao.com/lyric`;
-  return req.get(url,{
+  return req.get(url, {
     id: id
   });
 };

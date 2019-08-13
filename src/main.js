@@ -8,6 +8,9 @@ import "./config/rem";
 
 // import "./assets/iconfont/iconfont.css"  //引入iconfont
 
+// 是否开启mock数据
+import "@/mock/mock.js";
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

@@ -1,71 +1,60 @@
 <template>
-    <div>
-        <scroll class="wrapper-box" :data="list" :refreshDelay="20">
-            <div class="wrapper-content">
-                <section class="slider-box">
-                    <slider :loop="loop" :autoPlay="autoPlay">
-                        <div class="slider-item">
-                            <a href="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/279936.jpg">
-                                <img src="../images/banner1.jpg">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/279936.jpg">
-                                <img src="../images/banner2.jpg">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/279936.jpg">
-                                <img src="../images/banner3.jpg">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/279936.jpg">
-                                <img src="../images/banner4.jpg">
-                            </a>
-                        </div>
-                        <div class="slider-item">
-                            <a href="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/279936.jpg">
-                                <img src="../images/banner5.jpg">
-                            </a>
-                        </div>
-                    </slider>
-                </section>
-                <section class="recommend-list">
-                    <h1>每日歌单推荐</h1>
-                    <ul>
-                        <li class="list-item" v-for="(item,index) in list" @click="toDetil(item)" :key="index">
-                            <div class="item-img">
-                                <img :src="item.picUrl">
-                            </div>
-                            <div class="item-info">
-                                <p class="title" v-text="item.name"></p>
-                                <p class="copywriter">
-                                    <i class="iconfont icon-erji"></i>
-                                    <em class="playCount" v-text="parseInt(item.playCount/10000)+'万'"></em>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
+  <div>
+    <scroll class="wrapper-box" :data="list" :refreshDelay="20">
+      <div class="wrapper-content">
+        <section class="slider-box" v-if="bannerList.length > 0">
+          <slider :list="bannerList" @onselect="handleBanner">
+            <div
+              class="slider-item"
+              v-for="(item, index) in bannerList"
+              :key="item.id"
+            >
+              <img :src="item.pic" alt="" />
             </div>
-        </scroll>
-        <transition name="fadeRight">
-            <router-view></router-view>
-        </transition>
-    </div>
+          </slider>
+        </section>
+        <section class="recommend-list">
+          <h1>每日歌单推荐</h1>
+          <ul>
+            <li
+              class="list-item"
+              v-for="(item, index) in list"
+              @click="toDetil(item)"
+              :key="index"
+            >
+              <div class="item-img">
+                <img :src="item.picUrl" />
+              </div>
+              <div class="item-info">
+                <p class="title" v-text="item.name"></p>
+                <p class="copywriter">
+                  <i class="iconfont icon-erji"></i>
+                  <em
+                    class="playCount"
+                    v-text="parseInt(item.playCount / 10000) + '万'"
+                  ></em>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </scroll>
+    <transition name="fadeRight">
+      <router-view></router-view>
+    </transition>
+  </div>
 </template>
 <script>
 import scroll from "@/base/scroll";
 import slider from "@/base/slider";
-import { getRecommend } from "@/config/api";
+import { getBannerList, getRecommend } from "@/config/api";
 export default {
   name: "recommend",
   data() {
     return {
-      list: [],
-      loop: true,
-      autoPlay: true
+      bannerList: [],
+      list: []
     };
   },
   components: {
@@ -74,14 +63,25 @@ export default {
   },
   mounted() {
     this.getRecommendList();
+    this.getBannerListFun();
   },
   methods: {
     async getRecommendList() {
       // 获取推荐歌单
       let res = await getRecommend();
-      if (res.code == 200) {
+      if (res.code === 200) {
         this.list = res.result;
       }
+    },
+    async getBannerListFun() {
+      // 获取推荐歌单
+      let res = await getBannerList("recommend");
+      if (res.code === 200) {
+        this.bannerList = res.result;
+      }
+    },
+    handleBanner(item) {
+      console.log(item);
     },
     toDetil(item) {
       this.$router.push({
@@ -144,4 +144,3 @@ export default {
   }
 }
 </style>
-
